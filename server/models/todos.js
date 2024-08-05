@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const TodoSchema = mongoose.schema(
+const TodoSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -14,7 +14,7 @@ const TodoSchema = mongoose.schema(
       type: Boolean,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("Todo", TodoSchema);
