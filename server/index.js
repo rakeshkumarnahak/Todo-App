@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import User from "./models/users";
+import User from "./models/users.js";
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   res.status(500).json({ message: "All good, server is saying Hello World!" });
 });
 
-app.post("signup", async (req, res) => {
+app.post("/signup", async (req, res) => {
   try {
     const newUser = { ...req.body, id: Date.now() };
     console.log(newUser);

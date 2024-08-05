@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const TodoSchema = mongoose.schema(
+const TodoSchema = mongoose.Schema(
   {
     title: {
       type: String,
