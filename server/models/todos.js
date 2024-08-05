@@ -14,7 +14,7 @@ const TodoSchema = mongoose.Schema(
       type: Boolean,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("Todo", TodoSchema);
