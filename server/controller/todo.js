@@ -1,6 +1,6 @@
 import { Router } from "express";
-import Todo from "../models/todos";
-import { isLogged } from "./middleware";
+import Todo from "../models/todos.js";
+import { isLogged } from "../middleware/auth.js";
 
 const router = Router();
 

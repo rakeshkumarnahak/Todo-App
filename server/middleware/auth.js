@@ -1,9 +1,9 @@
-import User from "../models/users";
+import User from "../models/users.js";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const authenticate = async (req, res, next) => {
+export const isLogged = async (req, res, next) => {
   const authHeader = req.header.authorization;
   if (authHeader) {
     const token = authHeader.split(" ")[1];
