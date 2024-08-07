@@ -1,23 +1,28 @@
 import User from "../models/users.js";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 
 export const isLogged = async (req, res, next) => {
-  const authHeader = req.header.authorization;
+  if (!req.headers.authorization) {
+    res.status(400).json({ message: "Please send authorization token" });
+  }
+  const authHeader = req.headers.authorization;
+
   if (authHeader) {
     const token = authHeader.split(" ")[1];
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, async (err, userData) => {
       if (err) {
         console.log(err);
       }
-      res.user = user;
+
+      const user = await User.findOne({
+        username: userData.username,
+        password: userData.password,
+      });
+      req.user = user;
       next();
     });
-  }
-  const user = await User.findOne({ username, password });
-  if (username === user.username && password === user.password) {
-    res.status(200).json({ message: "User is authenticated" });
-    next();
   }
 };

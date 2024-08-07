@@ -9,6 +9,12 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  todos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Todo",
+    },
+  ],
 });
 
 export default mongoose.model("User", UserSchema);
