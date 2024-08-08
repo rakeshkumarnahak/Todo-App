@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 
 const router = Router();
-import jwt from "jsonwebtoken";
 
 dotenv.config();
 
@@ -28,7 +27,7 @@ router.post("/signup", async (req, res) => {
           const token = jwt.sign(
             { username: user.username, password: user.password },
             process.env.JWT_SECRET,
-            { expiresIn: "1h" }
+            { expiresIn: "1h" },
           );
           res.status(200).json({
             message: "User created Successfully",
@@ -53,7 +52,7 @@ router.post("/login", async (req, res) => {
       const token = jwt.sign(
         { username: username, password: password },
         process.env.JWT_SECRET,
-        { expiresIn: "1h" }
+        { expiresIn: "1h" },
       );
       return res
         .status(200)
