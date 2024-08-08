@@ -15,9 +15,9 @@ export const isLogged = async (req, res, next) => {
       next();
     });
   }
-  const user = await User.findOne({ username, password });
-  if (username === user.username && password === user.password) {
-    res.status(200).json({ message: "User is authenticated" });
-    next();
-  }
+  // const user = await User.findOne({ username, password });
+  // if (username === user.username && password === user.password) {
+  //   res.status(200).json({ message: "User is authenticated" });
+  //   next();
+  // }
 };

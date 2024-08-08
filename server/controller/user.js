@@ -1,6 +1,7 @@
 import { Router } from "express";
 import User from "../models/users.js";
 const router = Router();
+import jwt from "jsonwebtoken";
 
 router.get("/", (req, res) => {
   res.status(500).json({
