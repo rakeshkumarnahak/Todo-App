@@ -2,6 +2,7 @@ import { Router } from "express";
 import User from "../models/users.js";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import { isLogged } from "../middleware/auth.js";
 
 const router = Router();
 
@@ -14,11 +15,27 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/check-auth", isLogged, (req, res) => {
+  if (req.user) {
+    return res.status(200).json({
+      message: "User is authenticated",
+      authenticated: true,
+      user: req.user,
+    });
+  } else {
+    return res
+      .status(401)
+      .json({ message: "User is not authenticated", authenticated: false });
+  }
+});
+
 router.post("/signup", async (req, res) => {
   try {
     const existingUser = await User.findOne({ username: req.body.username });
     if (existingUser) {
-      res.status(400).json({ message: "User already present" });
+      res
+        .status(400)
+        .json({ message: "User already present", userPresent: true });
     } else {
       const user = new User(req.body);
       user
@@ -27,12 +44,13 @@ router.post("/signup", async (req, res) => {
           const token = jwt.sign(
             { username: user.username, password: user.password },
             process.env.JWT_SECRET,
-            { expiresIn: "1h" },
+            { expiresIn: "1h" }
           );
           res.status(200).json({
             message: "User created Successfully",
             user: user,
             token: token,
+            userPresent: true,
           });
         })
         .catch((error) => {
@@ -52,13 +70,18 @@ router.post("/login", async (req, res) => {
       const token = jwt.sign(
         { username: username, password: password },
         process.env.JWT_SECRET,
-        { expiresIn: "1h" },
+        { expiresIn: "1h" }
       );
-      return res
-        .status(200)
-        .json({ message: "User loggedin Successfully", token: token });
+      return res.status(200).json({
+        message: "User loggedin Successfully",
+        token: token,
+        userPresent: true,
+      });
     } else {
-      res.status(402).json({ message: "User is not present, Please SignUp" });
+      res.status(402).json({
+        message: "User is not present, Please SignUp",
+        userPresent: false,
+      });
     }
   } catch (error) {
     return res.status(502).json({ message: error.message });

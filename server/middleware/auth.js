@@ -5,8 +5,15 @@ import jwt from "jsonwebtoken";
 dotenv.config();
 
 export const isLogged = async (req, res, next) => {
-  if (!req.headers.authorization) {
-    res.status(400).json({ message: "Please send authorization token" });
+  if (
+    !req.headers.authorization ||
+    req.headers.authorization == "" ||
+    req.headers.authorization == ""
+  ) {
+    res.status(400).json({
+      message: "Please send authorization token",
+      authenticated: false,
+    });
   }
   const authHeader = req.headers.authorization;
 
@@ -15,6 +22,10 @@ export const isLogged = async (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, async (err, userData) => {
       if (err) {
         console.log(err);
+        res.status(400).json({
+          message: "Please send authorization token",
+          authenticated: false,
+        });
       }
 
       const user = await User.findOne({
