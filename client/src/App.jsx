@@ -20,14 +20,16 @@ const App = () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="flex justify-center items-center min-h-screen min-w-screen">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 };
 
