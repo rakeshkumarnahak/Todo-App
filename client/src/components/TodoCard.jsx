@@ -1,7 +1,15 @@
 export default function TodoCard() {
   return (
     <>
-      <div class="container mx-auto max-w-xl shadow-md my-2 p-2 rounded-md">
+      <div class="container flex mx-auto max-w-xl shadow-md my-2 p-2 rounded-md">
+        <div className="p-1 my-2">
+          <input
+            id="default-checkbox"
+            type="checkbox"
+            value=""
+            class="w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+        </div>
         <div class="h-50 w-full rounded-lg bg-white ">
           <div class="flex items-center justify-between border-e-teal-50">
             <div class="p-2 text-gray-700 text-lg font-semibold">Title</div>

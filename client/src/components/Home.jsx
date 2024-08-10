@@ -1,9 +1,9 @@
 import React from "react";
-
+import TodoList from "./TodoList";
 const Home = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen text-xl">
-      Home
+    <div >
+        <TodoList/>
     </div>
   );
 };
