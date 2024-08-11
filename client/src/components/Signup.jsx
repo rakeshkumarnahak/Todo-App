@@ -16,8 +16,9 @@ const Signup = () => {
         password: password,
       });
 
-      if (response.data.token) {
+      if (response.data.token && response.data.refreshToken) {
         localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
         navigate("/home");
         console.log(response.data.message);
       }
@@ -27,6 +28,7 @@ const Signup = () => {
       console.error(error);
     }
   };
+
   return (
     <>
       <div className="flex flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8">

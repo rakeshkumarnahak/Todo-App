@@ -9,6 +9,9 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  refreshToken: {
+    type: String,
+  },
   todos: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -19,8 +19,9 @@ const Login = () => {
         username: username,
         password: password,
       });
-      if (response.data.token) {
+      if (response.data.token && response.data.refreshToken) {
         localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
         navigate("/home");
         console.log("User loggedin Successfully");
       }

@@ -1,7 +1,7 @@
 import AddModal from "./AddModal";
 import TodoCard from "./TodoCard";
 import Filter from "./Filter";
-export default function TodoList() {
+const TodoList = (todos) => {
   return (
     <>
       <div className="parent-div shadow-lg rounded-lg flex flex-col min-h-screen justify-center items-center">
@@ -10,13 +10,13 @@ export default function TodoList() {
           <AddModal />
           <Filter />
         </div>
-
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
+        {/* {console.log(todos)} */}
+        {/* {todos.map((todo) => {
+          return <TodoCard todo={todo} key={todo._id} />;
+        })} */}
       </div>
     </>
   );
-}
+};
+
+export default TodoList;
